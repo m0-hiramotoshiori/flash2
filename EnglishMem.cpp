@@ -14,13 +14,13 @@ private:
 	string meaning;
 
 public:
-	void setWord(string newWord);  //’PŒê
-	void setMeaning(string newMeaning);  //ˆÓ–¡
-	void showcard(); //ƒtƒ‰ƒbƒVƒ…ƒJ[ƒhŠJn
-	void showAll(); //ƒtƒ@ƒCƒ‹“à‘S’PŒê•\¦
-	void addWord(string filename); //’PŒê’Ç‰Á
-	void deleteWord(string filename); //’PŒêíœ
-	void deleteAll(string filename); //‘S’PŒêíœ
+	void setWord(string newWord);  //å˜èª
+	void setMeaning(string newMeaning);  //æ„å‘³
+	void showcard(); //ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰é–‹å§‹
+	void showAll(); //ãƒ•ã‚¡ã‚¤ãƒ«å†…å…¨å˜èªè¡¨ç¤º
+	void addWord(string filename); //å˜èªè¿½åŠ 
+	void deleteWord(string filename); //å˜èªå‰Šé™¤
+	void deleteAll(string filename); //å…¨å˜èªå‰Šé™¤
 };
 void Flashcard ::setWord(string newWord) {
 	word = newWord;
@@ -30,11 +30,11 @@ void Flashcard ::setMeaning(string newMeaning) {
 	meaning = newMeaning;
 }
 void Flashcard ::showcard() {
-	cout << "’PŒê:" << word << endl; Sleep(2 * 1000);
-	cout << "ˆÓ–¡:" << meaning << endl; Sleep(2 * 1000);
+	cout << "å˜èª:" << word << endl; Sleep(2 * 1000);
+	cout << "æ„å‘³:" << meaning << endl; Sleep(2 * 1000);
 }
 void Flashcard ::showAll() {
-	cout << "’PŒê:" << word << "@@ˆÓ–¡:" << meaning << endl;
+	cout << "å˜èª:" << word << "ã€€ã€€æ„å‘³:" << meaning << endl;
 }
 
 void Flashcard ::addWord(string filename) {
@@ -43,11 +43,11 @@ void Flashcard ::addWord(string filename) {
 	vector<string> vocabs;
 	ofstream file(filename, ios::app);
 	if (!file.is_open()) {
-		cout << "ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ‚Å‚µ‚½B\n";
+		cout << "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“ã§ã—ãŸã€‚\n";
 	}
-	cout << "’PŒê:";
+	cout << "å˜èª:";
 	cin >> word;
-	cout << "ˆÓ–¡:";
+	cout << "æ„å‘³:";
 	cin >> meaning;
 	vocabs.emplace_back(word);
 	vocabs.emplace_back(meaning);
@@ -63,7 +63,7 @@ void Flashcard ::deleteWord(string filename) {
 	string meaning_to_delete;
 	char tango[30];
 
-	cout << "\n‚Ç‚Ì’PŒê‚ğíœ‚µ‚Ü‚·‚©? ‰p’PŒê‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢:";
+	cout << "\nã©ã®å˜èªã‚’å‰Šé™¤ã—ã¾ã™ã‹? è‹±å˜èªã‚’å…¥åŠ›ã—ã¦ãã ã•ã„:";
 	cin >> word_to_delete;
 	ifstream read(filename);
 	ofstream write("new.txt");
@@ -76,7 +76,7 @@ void Flashcard ::deleteWord(string filename) {
 		vector<string>::iterator it;
 		it = find(name.begin(), name.end(), a);
 		int pos = distance(name.begin(), it);
-		/*//Šm”F—p
+		/*//ç¢ºèªç”¨
 		if (it != name.end()) {
 			cout << "FOUND  " << *it << "  at position: " << pos << endl;
 		}
@@ -84,17 +84,17 @@ void Flashcard ::deleteWord(string filename) {
 			cout << "NOT FOUND" << endl;
 		}*/
 		try {
-			//cout << "pos+1‚ÌˆÊ’u‚Ì’PŒê‚Í:"<<name.at(pos+1) << endl; //Šm”F—p
+			//cout << "pos+1ã®ä½ç½®ã®å˜èªã¯:"<<name.at(pos+1) << endl; //ç¢ºèªç”¨
 			meaning_to_delete = name.at(pos + 1);
 		}
 		catch (const out_of_range& oor) {
-			//cout << "Error " << oor.what() << endl;@//Šm”F—p
+			//cout << "Error " << oor.what() << endl;ã€€//ç¢ºèªç”¨
 		}
 		if (tango != word_to_delete && tango != meaning_to_delete) {
 			write << endl << tango << endl;
 		}
 		else {
-			cout << "\níœ‚³‚ê‚Ü‚µ‚½B" << endl;
+			cout << "\nå‰Šé™¤ã•ã‚Œã¾ã—ãŸã€‚" << endl;
 		}
 	}
 	write.close();
@@ -104,10 +104,10 @@ void Flashcard ::deleteWord(string filename) {
 	const char* dst = str.c_str();
 
 	if (remove(dst) != 0) {
-		cout << "\n’PŒê‚Ííœ‚³‚ê‚Ü‚¹‚ñ‚Å‚µ‚½B" << endl;
+		cout << "\nå˜èªã¯å‰Šé™¤ã•ã‚Œã¾ã›ã‚“ã§ã—ãŸã€‚" << endl;
 	}
 	if (rename("new.txt", dst) != 0) {
-		cout << "\nƒtƒ@ƒCƒ‹–¼‚ğ•ÏX‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B" << endl;
+		cout << "\nãƒ•ã‚¡ã‚¤ãƒ«åã‚’å¤‰æ›´ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚" << endl;
 	}
 }
 void Flashcard::deleteAll(string filename) {
@@ -115,18 +115,18 @@ void Flashcard::deleteAll(string filename) {
 	string str = filename;
 	const char* dst = str.c_str();
 	if (remove(dst) != 0) {
-		cout << "’PŒê‚ª“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB" << endl;
+		cout << "å˜èªãŒç™»éŒ²ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚" << endl;
 	}
 	else {
-		cout << "‚·‚×‚Äíœ‚³‚ê‚Ü‚µ‚½B" << endl;
+		cout << "ã™ã¹ã¦å‰Šé™¤ã•ã‚Œã¾ã—ãŸã€‚" << endl;
 	}
 
 }
 
 int main() {
-	cout << "”¼Šp‚Å”Ô†‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B";
+	cout << "åŠè§’ã§ç•ªå·ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚";
 	loop:
-		cout << "\n‚Ç‚ê‚É‚µ‚Ü‚·‚©B\n -1- ƒtƒ‰ƒbƒVƒ…ƒJ[ƒh \n -2- ’PŒê•ÒW\n -3- ‘S’PŒê•\¦\n Enter:";
+		cout << "\nã©ã‚Œã«ã—ã¾ã™ã‹ã€‚\n -1- ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰ \n -2- å˜èªç·¨é›†\n -3- å…¨å˜èªè¡¨ç¤º\n Enter:";
 		int select;
 		int select2_1;
 		int select2_2;
@@ -142,18 +142,18 @@ int main() {
 		vector<Flashcard> flash;
 		
 		
-		//1.ƒtƒ‰ƒbƒVƒ…ƒJ[ƒh
+		//1.ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰
 		switch (select) {
 		case 1: {
 
-			cout << "\n------------------ [ƒtƒ‰ƒbƒVƒ…ƒJ[ƒh] ------------------\n ‚Ç‚ÌƒZƒbƒg‚ğŠw‚Ñ‚Ü‚·‚©B \n -1- set1 \n -2- set2 \n -3- set3 \n -0- –ß‚é \n Enter:";//select2_1
+			cout << "\n------------------ [ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰] ------------------\n ã©ã®ã‚»ãƒƒãƒˆã‚’å­¦ã³ã¾ã™ã‹ã€‚ \n -1- set1 \n -2- set2 \n -3- set3 \n -0- æˆ»ã‚‹ \n Enter:";//select2_1
 			cin >> select2_1;
 			switch (select2_1) {
 			case 0: {
 				goto loop;
 			}
 			case 1: {
-				cout << "\n¦ƒXƒy[ƒXƒL[’·‰Ÿ‚µ‚Å’†’f" << endl << endl;
+				cout << "\nâ€»ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼é•·æŠ¼ã—ã§ä¸­æ–­" << endl << endl;
 				ifstream infile("wordlist.txt");
 				while (infile >> word >> meaning) {
 					flash.emplace_back();
@@ -166,7 +166,7 @@ int main() {
 				
 					if (_kbhit()) {
 						break;
-						cout << "’†’f" << endl;
+						cout << "ä¸­æ–­" << endl;
 						goto loop;
 					}
 						flash[i].showcard();
@@ -174,7 +174,7 @@ int main() {
 				goto loop;
 			}
 			case 2: {
-				cout << "\n¦ƒXƒy[ƒXƒL[’·‰Ÿ‚µ‚Å’†’f" << endl << endl;
+				cout << "\nâ€»ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼é•·æŠ¼ã—ã§ä¸­æ–­" << endl << endl;
 				ifstream infile("wordlist2.txt");
 				while (infile >> word >> meaning) {
 					flash.emplace_back();
@@ -186,7 +186,7 @@ int main() {
 				for (int i = 0; i < flash.size(); i++) {
 					if (_kbhit()) {
 						break;
-						cout << "’†’f" << endl;
+						cout << "ä¸­æ–­" << endl;
 						goto loop;
 					}
 					flash[i].showcard();
@@ -194,7 +194,7 @@ int main() {
 				goto loop;
 			}
 			case 3: {
-				cout << "\n¦ƒXƒy[ƒXƒL[’·‰Ÿ‚µ‚Å’†’f" << endl << endl;
+				cout << "\nâ€»ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼é•·æŠ¼ã—ã§ä¸­æ–­" << endl << endl;
 				ifstream infile("wordlist3.txt");
 				while (infile >> word >> meaning) {
 					flash.emplace_back();
@@ -206,7 +206,7 @@ int main() {
 				for (int i = 0; i < flash.size(); i++) {
 					if (_kbhit()) {
 						break;
-						cout << "’†’f" << endl;
+						cout << "ä¸­æ–­" << endl;
 						goto loop;
 					}
 					flash[i].showcard();
@@ -218,9 +218,9 @@ int main() {
 			break;
 		}
 
-	    //2.’PŒê“o˜^
+	    //2.å˜èªç™»éŒ²
 		case 2: {
-			cout << "\n---------------------- [’PŒê•ÒW] ----------------------\n ‚Ç‚ê‚ğ•ÒW‚µ‚Ü‚·‚©B\n -1- set1 \n -2- set2 \n -3- set3 \n -0- –ß‚é \n Enter:";//select2_2
+			cout << "\n---------------------- [å˜èªç·¨é›†] ----------------------\n ã©ã‚Œã‚’ç·¨é›†ã—ã¾ã™ã‹ã€‚\n -1- set1 \n -2- set2 \n -3- set3 \n -0- æˆ»ã‚‹ \n Enter:";//select2_2
 			cin >> select2_2;
 			switch(select2_2) {
 			case 0: {
@@ -236,7 +236,7 @@ int main() {
 				infile.close();
 		    	for (int i = 0; i < flash.size(); i++) flash[i].showAll();
 				loop_1:
-				cout << "\n -1- ’PŒê’Ç‰Á \n -2- ’PŒêíœ \n -3- ƒtƒ@ƒCƒ‹“à‚Ì’PŒê‚ğ‘Síœ \n -0- –ß‚é\n Enter:";
+				cout << "\n -1- å˜èªè¿½åŠ  \n -2- å˜èªå‰Šé™¤ \n -3- ãƒ•ã‚¡ã‚¤ãƒ«å†…ã®å˜èªã‚’å…¨å‰Šé™¤ \n -0- æˆ»ã‚‹\n Enter:";
 				cin >> select2_2_1;
 				if (select2_2_1 == 1) {
 					flashcard1.addWord("wordlist.txt");
@@ -247,7 +247,7 @@ int main() {
 					goto loop_1;
 				}
 				else if (select2_2_1 == 3) {
-					cout << "ƒtƒ@ƒCƒ‹“à‚Ì’PŒê‚ğ‚·‚×‚Äíœ‚µ‚Ü‚·B–{“–‚É‚æ‚ë‚µ‚¢‚Å‚·‚©H\n -1- ‚Í‚¢ or -2- ‚¢‚¢‚¦ \n Enter:";
+					cout << "ãƒ•ã‚¡ã‚¤ãƒ«å†…ã®å˜èªã‚’ã™ã¹ã¦å‰Šé™¤ã—ã¾ã™ã€‚æœ¬å½“ã«ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ\n -1- ã¯ã„ or -2- ã„ã„ãˆ \n Enter:";
 					cin >> yes_no;
 					if (yes_no ==1) {
 						flashcard1.deleteAll("wordlist.txt");
@@ -274,7 +274,7 @@ int main() {
 				infile.close();
 				for (int i = 0; i < flash.size(); i++) flash[i].showAll();
 			loop_1_2:
-				cout << "\n -1- ’PŒê’Ç‰Á \n -2- ’PŒêíœ \n -3- ƒtƒ@ƒCƒ‹“à‚Ì’PŒê‚ğ‘Síœ \n -0- –ß‚é\n Enter:";
+				cout << "\n -1- å˜èªè¿½åŠ  \n -2- å˜èªå‰Šé™¤ \n -3- ãƒ•ã‚¡ã‚¤ãƒ«å†…ã®å˜èªã‚’å…¨å‰Šé™¤ \n -0- æˆ»ã‚‹\n Enter:";
 				cin >> select2_2_1;
 				if (select2_2_1 == 1) {
 					flashcard1.addWord("wordlist2.txt");
@@ -285,7 +285,7 @@ int main() {
 					goto loop_1_2;
 				}
 				else if (select2_2_1 == 3) {
-					cout << "ƒtƒ@ƒCƒ‹“à‚Ì’PŒê‚ğ‚·‚×‚Äíœ‚µ‚Ü‚·B–{“–‚É‚æ‚ë‚µ‚¢‚Å‚·‚©H\n -1- ‚Í‚¢ or -2- ‚¢‚¢‚¦ \n Enter:";
+					cout << "ãƒ•ã‚¡ã‚¤ãƒ«å†…ã®å˜èªã‚’ã™ã¹ã¦å‰Šé™¤ã—ã¾ã™ã€‚æœ¬å½“ã«ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ\n -1- ã¯ã„ or -2- ã„ã„ãˆ \n Enter:";
 					cin >> yes_no;
 					if (yes_no == 1) {
 						flashcard1.deleteAll("wordlist2.txt");
@@ -314,7 +314,7 @@ int main() {
 				infile.close();
 				for (int i = 0; i < flash.size(); i++) flash[i].showAll();
 			loop_1_3:
-				cout << "\n -1- ’PŒê’Ç‰Á \n -2- ’PŒêíœ \n -3- ƒtƒ@ƒCƒ‹“à‚Ì’PŒê‚ğ‘Síœ \n -0- –ß‚é\n Enter:";
+				cout << "\n -1- å˜èªè¿½åŠ  \n -2- å˜èªå‰Šé™¤ \n -3- ãƒ•ã‚¡ã‚¤ãƒ«å†…ã®å˜èªã‚’å…¨å‰Šé™¤ \n -0- æˆ»ã‚‹\n Enter:";
 				cin >> select2_2_1;
 				if (select2_2_1 == 1) {
 					flashcard1.addWord("wordlist3.txt");
@@ -325,7 +325,7 @@ int main() {
 					goto loop_1_3;
 				}
 				else if (select2_2_1 == 3) {
-					cout << "ƒtƒ@ƒCƒ‹“à‚Ì’PŒê‚ğ‚·‚×‚Äíœ‚µ‚Ü‚·B–{“–‚É‚æ‚ë‚µ‚¢‚Å‚·‚©H\n -1- ‚Í‚¢ or -2- ‚¢‚¢‚¦ \n Enter:";
+					cout << "ãƒ•ã‚¡ã‚¤ãƒ«å†…ã®å˜èªã‚’ã™ã¹ã¦å‰Šé™¤ã—ã¾ã™ã€‚æœ¬å½“ã«ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ\n -1- ã¯ã„ or -2- ã„ã„ãˆ \n Enter:";
 					cin >> yes_no;
 					if (yes_no == 1) {
 						flashcard1.deleteAll("wordlist3.txt");
@@ -348,10 +348,10 @@ int main() {
 			goto loop;
 			break;
 		}
-	    //3.‘S’PŒê•\¦
+	    //3.å…¨å˜èªè¡¨ç¤º
 		case 3: {
 			loop_2:
-			cout << "\n--------------------- [‘S’PŒê•\¦] ---------------------\n -1- ’PŒê‹y‚ÑˆÓ–¡‚ğˆêŠ‡•\¦ \n -2- ’PŒê‚Ì‚İƒAƒ‹ƒtƒ@ƒxƒbƒg‡•\¦ \n -0- –ß‚é\n Enter:";
+			cout << "\n--------------------- [å…¨å˜èªè¡¨ç¤º] ---------------------\n -1- å˜èªåŠã³æ„å‘³ã‚’ä¸€æ‹¬è¡¨ç¤º \n -2- å˜èªã®ã¿ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆé †è¡¨ç¤º \n -0- æˆ»ã‚‹\n Enter:";
 			cin >> select2_3;
 			switch (select2_3) {
 			case 1: {
@@ -360,8 +360,8 @@ int main() {
 				ifstream infile("wordlist.txt");
 				ifstream infile2("wordlist2.txt");
 				ifstream infile3("wordlist3.txt");
-				if (!infile.is_open() || !!infile2.is_open() || !infile3.is_open()) {
-					cout << "ŠJ‚¯‚È‚¢ƒtƒ@ƒCƒ‹‚ª‚ ‚è‚Ü‚µ‚½B" << endl;
+				if (!infile.is_open() || !infile2.is_open() || !infile3.is_open()) {
+					cout << "é–‹ã‘ãªã„ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚Šã¾ã—ãŸã€‚" << endl;
 				}
 				string input;
 				while (infile >> word >> meaning) {
@@ -392,7 +392,7 @@ int main() {
 				ifstream infile2("wordlist2.txt");
 				ifstream infile3("wordlist3.txt");
 				if (!infile.is_open() || !!infile2.is_open() || !infile3.is_open()) {
-					cout << "ŠJ‚¯‚È‚¢ƒtƒ@ƒCƒ‹‚ª‚ ‚è‚Ü‚µ‚½B" << endl;
+					cout << "é–‹ã‘ãªã„ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚Šã¾ã—ãŸã€‚" << endl;
 				}
 				string input;
 				while (getline(infile, input)) {
