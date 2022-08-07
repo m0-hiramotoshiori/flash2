@@ -391,7 +391,7 @@ int main() {
 				ifstream infile("wordlist.txt");
 				ifstream infile2("wordlist2.txt");
 				ifstream infile3("wordlist3.txt");
-				if (!infile.is_open() || !!infile2.is_open() || !infile3.is_open()) {
+				if (!infile.is_open() || !infile2.is_open() || !infile3.is_open()) {
 					cout << "開けないファイルがありました。" << endl;
 				}
 				string input;
